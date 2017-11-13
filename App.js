@@ -1,21 +1,14 @@
 
-// import {
-//   StackNavigator,
-// } from 'react-navigation';
-
-//  const App = StackNavigator({
-//   LoginScreen: { screen: LoginScreen },
-//   ProfileScreen: { screen: ProfileScreen },
-// });
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import { StackNavigator } from 'react-navigation';
-import {StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import {AppRegistry,Button, StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 
 
-class LoginScreen extends Component{
+class LoginScreen extends React.Component{
   static navigationOptions = {
     title: 'MazuMah'
   };
+
   render(){
     const { navigate } = this.props.navigation;
     return(
@@ -47,27 +40,36 @@ class LoginScreen extends Component{
             style = {styles.input1}
             ref= {(input) => this.pwInput = input}
             />
-            <View>
 
-              </View>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity>
-           
-               <Text style = {styles.buttonText}>Create Account</Text>
-            </TouchableOpacity>
+
+            <Button
+              onPress={() => navigate('Profile')}
+              title="Login"
+              color= "#D3A15D"
+            />
            </View>
-          <View style={styles.buttonContainer1}>
-            <TouchableOpacity>
-              <Text style = {styles.buttonText1}>Login</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style = {styles.contNoAccount}>
-            <Text style = {styles.buttonText}>Continue Without Account</Text>
-          </TouchableOpacity>
-        </View>
+           <View style={styles.buttonContainer}>
+
+            <Button
+              onPress={() => navigate('Profile')}
+              title="Create Account"
+              color= "#D3A15D"
+            />
+           </View>
+           <View style={styles.buttonContainer}>
+
+            <Button
+              onPress={() => navigate('Profile')}
+              title="Continue Without Account"
+              color= "#D3A15D"
+            />
+           </View>
+           </View>
       </KeyboardAvoidingView>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -77,7 +79,8 @@ const styles = StyleSheet.create({
   },
   image:{
      width: 360, 
-     height: 300
+     height: 300,
+     top: -80
   },
   logoContainer:{
     alignItems: 'center',
@@ -91,14 +94,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Courier New',
     width: 478,
     fontWeight: 'bold',
-    fontSize: 40
+    fontSize: 40,
+    top: -80
   },
   input:{
     borderRadius: 10,
     marginRight: 60,
     marginLeft: 60,
-    marginBottom: 20,
+    marginBottom: 15,
     height: 40,
+    top: -80,
     backgroundColor: 'rgba(255,255,255,.7)'
   },
   input1:{
@@ -107,6 +112,7 @@ const styles = StyleSheet.create({
     marginLeft: 60,
     marginBottom: 15,
     height: 40,
+    top: -80,
     backgroundColor: 'rgba(255,255,255,.7)'
   },
   submitForm:{
@@ -115,30 +121,34 @@ const styles = StyleSheet.create({
   },
   buttonContainer:{
     alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
     paddingLeft: 50,
     paddingRight: 60,
-    marginBottom: 50,
-    marginTop: 30,
-    borderWidth: 1,
-    borderColor: '#D3A15D'
+    marginBottom: 10,
+    marginTop: 10,
+    top: -80,
+    // borderWidth: 1,
+    borderColor: '#D3A15D',
   },
   buttonContainer1:{
     alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
     paddingLeft: 50,
     paddingRight: 60,
-    marginBottom: 50,
-    marginTop: 30,
-    borderWidth: 1,
+    marginBottom: 10,
+    marginTop: 10,
+    top: -80,
+    // borderWidth: 1,
     borderColor: '#D3A15D'
   },
   contNoAccount:{
     alignItems: 'center',
-    marginBottom: 100,
-    borderWidth: 1,
+    marginBottom: 10,
+    marginTop: 10,
+    top: -80,
+    // borderWidth: 1,
     borderColor: '#D3A15D'
   },
   buttonText:{
@@ -150,30 +160,43 @@ const styles = StyleSheet.create({
     color: '#D3A15D',
     fontFamily: 'Courier New',
     fontWeight: 'bold',
+  },
+  buttonText2:{
+    color: '#D3A15D',
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
   }
 })
 
-class ProfileScreen extends Component{
-  render(){
-    <Text>Profile Page</Text>
+class ProfileScreen extends React.Component{
+  static navigationOptions = {
+    title: 'Profile Page',
+  };
+  render() {
+    return (
+      <View>
+        <Text>Welcome To Your Profile Page</Text>
+      </View>
+    );
   }
 
 
 }
 
-const SimpleApp = StackNavigator({
+export const SimpleApp = StackNavigator ({
   Login: { screen: LoginScreen },
   Profile: { screen: ProfileScreen },
 });
 
 export default class App extends React.Component {
-  static navigationOptions = {
-    title: 'Profile Page',
-  };
+
   render() {
     return <SimpleApp />;
   }
+
 }
+
+AppRegistry.registerComponent('SimpleApp', () => SimpleApp);
 
 
 
