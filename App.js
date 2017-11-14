@@ -5,59 +5,90 @@ import {AppRegistry,Button, StyleSheet, View, Image, Text, TextInput, TouchableO
 
 
 class LoginScreen extends React.Component{
-  static navigationOptions = {
-    title: 'MazuMah'
-  };
+  // static navigationOptions = {
+  //   title: 'MazuMah'
+  // };
+
+
+  // this.state = {
+  //     username: '',
+  //     password: '',
+  //     error: null,
+  //   };
+  // }
+
+  // isValid(){
+  //  const { username, password } = this.state;
+  //   let valid = false;
+
+  //   if (username.length > 0 && password.length > 0) {
+  //     valid = true;
+  //   }
+
+  //   if (username.length === 0) {
+  //     this.setState({ error: 'You must enter a username' });
+  //   } else if (password.length === 0) {
+  //     this.setState({ error: 'You must enter a password' });
+  //   }
+
+  //   return valid;
+  // }
+
+
+  // }
+
 
   render(){
     const { navigate } = this.props.navigation;
     return(
-      <KeyboardAvoidingView behavior = "padding" style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Text style = {styles.title}>MazuMah</Text>
+      <KeyboardAvoidingView behavior = "padding" style={Loginstyles.container}>
+        <View style={Loginstyles.logoContainer}>
+          <Text style = {Loginstyles.title}>MazuMah</Text>
         </View>
-        <View style={styles.formContainer}>
+        <View style={Loginstyles.formContainer}>
          <Image
          
-          style={styles.image}
+          style={Loginstyles.image}
           source={require('./MMLogo.png')}
         />
           
           <TextInput
             placeholder ="Username"
+            onChangeText={(username) => this.setState({username})}
             placeholderTextColor = "#808080"
             returnKeyType = "next"
-            style = {styles.input}
+            style = {Loginstyles.input}
             onSubmitEditing={() => this.pwInput.focus()}
             />
            
             
           <TextInput
             placeholder ="Password"
+            onChangeText={(password) => this.setState({password})}
             placeholderTextColor = "#808080"
             secureTextEntry={true}
             returnKeyType = "go"
-            style = {styles.input1}
+            style = {Loginstyles.input1}
             ref= {(input) => this.pwInput = input}
             />
 
-          <View style={styles.buttonContainer}>
+          <View style={Loginstyles.buttonContainer}>
 
             <Button
-              onPress={() => navigate('Profile')}
+              onPress={() => navigate('Dashboard')}
               title="Login"
               color= "#D3A15D"
             />
            </View>
-           <View style={styles.buttonContainer}>
+           <View style={Loginstyles.buttonContainer}>
 
             <Button
-              onPress={() => navigate('Profile')}
+              onPress={() => navigate('Dashboard')}
               title="Create Account"
               color= "#D3A15D"
             />
            </View>
-           <View style={styles.buttonContainer}>
+           <View style={Loginstyles.buttonContainer}>
 
             <Button
               onPress={() => navigate('Profile')}
@@ -65,14 +96,14 @@ class LoginScreen extends React.Component{
               color= "#D3A15D"
             />
            </View>
-           </View>
+          </View>
       </KeyboardAvoidingView>
     );
   }
 
 }
 
-const styles = StyleSheet.create({
+const Loginstyles = StyleSheet.create({
   container:{
     flex: 1,
     backgroundColor: '#000000'
@@ -168,23 +199,65 @@ const styles = StyleSheet.create({
   }
 })
 
-class ProfileScreen extends React.Component{
+class MainScreen extends React.Component{
   static navigationOptions = {
-    title: 'Profile Page',
+    title: 'Dashboard',
   };
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View>
-        <Text>Welcome To Your Profile Page</Text>
+        <Text>Welcome To Your Dashboard</Text>
+          <Button
+              onPress={() => navigate('Profile')}
+              title="See Your Profile"
+              color= "#D3A15D"
+          />
       </View>
     );
   }
 
 
 }
+class ProfileScreen extends React.Component{
+  static navigationOptions = {
+    title: 'Profile Page',
+  };
+  render() {
+    return (
+      <View style={Profilestyles.logoContainer}>
+        <Text style={Profilestyles.title}>Hello! " insert username" </Text>
+      </View>
+ 
+    );
+  }
+
+}
+
+const Profilestyles = StyleSheet.create({
+logoContainer:{
+    alignItems: 'center',
+    flexGrow: 1,
+    paddingTop: 20,
+    
+},
+title:{
+    textAlign: 'center',
+    fontFamily: 'Courier New',
+    width: 300,
+    fontWeight: 'bold',
+    fontSize: 30,
+    
+
+}
+
+
+})
+
 
 export const SimpleApp = StackNavigator ({
   Login: { screen: LoginScreen },
+  Dashboard: { screen: MainScreen },
   Profile: { screen: ProfileScreen },
 });
 
