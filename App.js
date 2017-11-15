@@ -1,8 +1,7 @@
 
 import React, {Component, PropTypes} from 'react';
 import { StackNavigator } from 'react-navigation';
-import {CameraRoll, Slider, AppRegistry,Button, Switch,
-  StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import {AppRegistry,Button, StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 
 
 class LoginScreen extends React.Component{
@@ -48,11 +47,11 @@ class LoginScreen extends React.Component{
         </View>
         <View style={Loginstyles.formContainer}>
          <Image
-         
+
           style={Loginstyles.image}
           source={require('./MMLogo.png')}
         />
-          
+
           <TextInput
             placeholder ="Username"
             onChangeText={(username) => this.setState({username})}
@@ -61,8 +60,8 @@ class LoginScreen extends React.Component{
             style = {Loginstyles.input}
             onSubmitEditing={() => this.pwInput.focus()}
             />
-           
-            
+
+
           <TextInput
             placeholder ="Password"
             onChangeText={(password) => this.setState({password})}
@@ -110,7 +109,7 @@ const Loginstyles = StyleSheet.create({
     backgroundColor: '#000000'
   },
   image:{
-     width: 360, 
+     width: 360,
      height: 300,
      top: -80
   },
@@ -207,118 +206,93 @@ class MainScreen extends React.Component{
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        <Text>Welcome To Your Dashboard</Text>
-          <Button
-              onPress={() => navigate('Profile')}
-              title="See Your Profile"
-              color= "#D3A15D"
-          />
+      <View style={MainStyle.pageContainer}>
+          <View style={MainStyle.topContainer}>
+            <Text style = {{color: 'white', textAlign: 'center'}}>Welcome To Your Dashboard</Text>
+              <Button
+                onPress={() => navigate('Profile')}
+                title="See Your Profile"
+                color= "#D3A15D"
+              />
+          </View>
+          <View style={MainStyle.midContainer}>
+            <Text style={MainStyle.graphTitle}> Owner Metrics</Text>
+          </View>
+          <View style={MainStyle.botContainer}>
+            <Text style={MainStyle.botTitle}>Price:</Text>
+            <Text style={MainStyle.botTitle}># of Miners:</Text>
+            <Text style={MainStyle.botTitle}># of Commits:</Text>
+            <Text style={MainStyle.botTitle}># of Clients:</Text>
+          </View>
       </View>
+
     );
   }
-
-
 }
 
-// for image uploader
-const CameraRollView = require('./CameraRollView');
-
-const AssetScaledImageExampleView = require('./AssetScaledImageExample');
-
-const CAMERA_ROLL_VIEW = 'camera_roll_view';
+const MainStyle = StyleSheet.create({
+  pageContainer:{
+    flex:1
+  },
+  topContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    width:375,
+    height: 50,
+    backgroundColor: 'black'
+  },
+  midContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    width:375,
+    backgroundColor: 'grey',
+    paddingBottom: 250
+  },
+  botContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    width:375,
+    height: 50,
+    backgroundColor: 'black',
+  },
+  graphTitle:{
+    color: '#D3A15D',
+    paddingLeft: 100,
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  botTitle:{
+    paddingTop:10,
+    color: '#D3A15D',
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingLeft: 90
+  }
+})
 
 class ProfileScreen extends React.Component{
   static navigationOptions = {
     title: 'Profile Page',
   };
-  getInitialState() {
-    return {
-      groupTypes: 'SavedPhotos',
-      sliderValue: 1,
-      bigImages: true,
-    };
-  }
   render() {
     return (
-      <View>
-        <View style={Profilestyles.logoContainer}>
-          <Text style={Profilestyles.title}>Welcome To Your Profile!</Text>
-        </View>
-        <View>
-          <Switch
-            onValueChange={this._onSwitchChange}
-            value={this.state.bigImages} />
-          <Text>{(this.state.bigImages ? 'Big' : 'Small') + ' Images'}</Text>
-          <Slider
-            value={this.state.sliderValue}
-            onValueChange={this._onSliderChange}
-          />
-          <Text>{'Group Type: ' + this.state.groupTypes}</Text>
-          <CameraRollView
-            ref={CAMERA_ROLL_VIEW}
-            batchSize={20}
-            groupTypes={this.state.groupTypes}
-            renderImage={this._renderImage}
-          />
-        </View>
-        </View>
+      <View style={Profilestyles.logoContainer}>
+        <Text style={Profilestyles.title}>Hello! " insert username" </Text>
+      </View>
 
- 
     );
   }
-  loadAsset(asset){
-    if (this.props.navigator) {
-      this.props.navigator.push({
-        title: 'Camera Roll Image',
-        component: AssetScaledImageExampleView,
-        backButtonTitle: 'Back',
-        passProps: { asset: asset },
-      });
-    }
-  };
-  _renderImage(asset) {
-    const imageSize = this.state.bigImages ? 150 : 75;
-    const imageStyle = [styles.image, {width: imageSize, height: imageSize}];
-    const location = asset.node.location.longitude ?
-      JSON.stringify(asset.node.location) : 'Unknown location';
-    return (
-      <TouchableOpacity key={asset} onPress={ this.loadAsset.bind( this, asset ) }>
-        <View style={styles.row}>
-          <Image
-            source={asset.node.image}
-            style={imageStyle}
-          />
-          <View style={styles.info}>
-            <Text style={styles.url}>{asset.node.image.uri}</Text>
-            <Text>{location}</Text>
-            <Text>{asset.node.group_name}</Text>
-            <Text>{new Date(asset.node.timestamp).toString()}</Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-  _onSliderChange(value) {
-    const options = CameraRoll.GroupTypesOptions;
-    const index = Math.floor(value * options.length * 0.99);
-    const groupTypes = options[index];
-    if (groupTypes !== this.state.groupTypes) {
-      this.setState({groupTypes: groupTypes});
-    }
-  }
-  _onSwitchChange(value) {
-    this.refs[CAMERA_ROLL_VIEW].rendererChanged();
-    this.setState({ bigImages: value });
-  }
-};
+
+}
 
 const Profilestyles = StyleSheet.create({
 logoContainer:{
     alignItems: 'center',
     flexGrow: 1,
     paddingTop: 20,
-    
+
 },
 title:{
     textAlign: 'center',
@@ -326,7 +300,7 @@ title:{
     width: 300,
     fontWeight: 'bold',
     fontSize: 30,
-    
+
 
 }
 
@@ -349,6 +323,3 @@ export default class App extends React.Component {
 }
 
 AppRegistry.registerComponent('SimpleApp', () => SimpleApp);
-
-
-
