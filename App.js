@@ -1,7 +1,8 @@
 
 import React, {Component, PropTypes} from 'react';
 import { StackNavigator } from 'react-navigation';
-import {AppRegistry,Button, StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+import {CameraRoll, Slider, AppRegistry,Button, Switch,
+  StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 
 
 class LoginScreen extends React.Component{
@@ -219,20 +220,98 @@ class MainScreen extends React.Component{
 
 
 }
+
+// for image uploader
+const CameraRollView = require('./CameraRollView');
+
+const AssetScaledImageExampleView = require('./AssetScaledImageExample');
+
+const CAMERA_ROLL_VIEW = 'camera_roll_view';
+
 class ProfileScreen extends React.Component{
   static navigationOptions = {
     title: 'Profile Page',
   };
+  getInitialState() {
+    return {
+      groupTypes: 'SavedPhotos',
+      sliderValue: 1,
+      bigImages: true,
+    };
+  }
   render() {
     return (
-      <View style={Profilestyles.logoContainer}>
-        <Text style={Profilestyles.title}>Hello! " insert username" </Text>
-      </View>
+      <View>
+        <View style={Profilestyles.logoContainer}>
+          <Text style={Profilestyles.title}>Welcome To Your Profile!</Text>
+        </View>
+        <View>
+          <Switch
+            onValueChange={this._onSwitchChange}
+            value={this.state.bigImages} />
+          <Text>{(this.state.bigImages ? 'Big' : 'Small') + ' Images'}</Text>
+          <Slider
+            value={this.state.sliderValue}
+            onValueChange={this._onSliderChange}
+          />
+          <Text>{'Group Type: ' + this.state.groupTypes}</Text>
+          <CameraRollView
+            ref={CAMERA_ROLL_VIEW}
+            batchSize={20}
+            groupTypes={this.state.groupTypes}
+            renderImage={this._renderImage}
+          />
+        </View>
+        </View>
+
  
     );
   }
-
-}
+  loadAsset(asset){
+    if (this.props.navigator) {
+      this.props.navigator.push({
+        title: 'Camera Roll Image',
+        component: AssetScaledImageExampleView,
+        backButtonTitle: 'Back',
+        passProps: { asset: asset },
+      });
+    }
+  };
+  _renderImage(asset) {
+    const imageSize = this.state.bigImages ? 150 : 75;
+    const imageStyle = [styles.image, {width: imageSize, height: imageSize}];
+    const location = asset.node.location.longitude ?
+      JSON.stringify(asset.node.location) : 'Unknown location';
+    return (
+      <TouchableOpacity key={asset} onPress={ this.loadAsset.bind( this, asset ) }>
+        <View style={styles.row}>
+          <Image
+            source={asset.node.image}
+            style={imageStyle}
+          />
+          <View style={styles.info}>
+            <Text style={styles.url}>{asset.node.image.uri}</Text>
+            <Text>{location}</Text>
+            <Text>{asset.node.group_name}</Text>
+            <Text>{new Date(asset.node.timestamp).toString()}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+  _onSliderChange(value) {
+    const options = CameraRoll.GroupTypesOptions;
+    const index = Math.floor(value * options.length * 0.99);
+    const groupTypes = options[index];
+    if (groupTypes !== this.state.groupTypes) {
+      this.setState({groupTypes: groupTypes});
+    }
+  }
+  _onSwitchChange(value) {
+    this.refs[CAMERA_ROLL_VIEW].rendererChanged();
+    this.setState({ bigImages: value });
+  }
+};
 
 const Profilestyles = StyleSheet.create({
 logoContainer:{
