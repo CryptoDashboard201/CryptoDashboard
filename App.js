@@ -47,11 +47,11 @@ class LoginScreen extends React.Component{
         </View>
         <View style={Loginstyles.formContainer}>
          <Image
-         
+
           style={Loginstyles.image}
           source={require('./MMLogo.png')}
         />
-          
+
           <TextInput
             placeholder ="Username"
             onChangeText={(username) => this.setState({username})}
@@ -60,8 +60,8 @@ class LoginScreen extends React.Component{
             style = {Loginstyles.input}
             onSubmitEditing={() => this.pwInput.focus()}
             />
-           
-            
+
+
           <TextInput
             placeholder ="Password"
             onChangeText={(password) => this.setState({password})}
@@ -109,7 +109,7 @@ const Loginstyles = StyleSheet.create({
     backgroundColor: '#000000'
   },
   image:{
-     width: 360, 
+     width: 360,
      height: 300,
      top: -80
   },
@@ -206,19 +206,72 @@ class MainScreen extends React.Component{
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        <Text>Welcome To Your Dashboard</Text>
-          <Button
-              onPress={() => navigate('Profile')}
-              title="See Your Profile"
-              color= "#D3A15D"
-          />
+      <View style={MainStyle.pageContainer}>
+          <View style={MainStyle.topContainer}>
+            <Text style = {{color: 'white', textAlign: 'center'}}>Welcome To Your Dashboard</Text>
+              <Button
+                onPress={() => navigate('Profile')}
+                title="See Your Profile"
+                color= "#D3A15D"
+              />
+          </View>
+          <View style={MainStyle.midContainer}>
+            <Text style={MainStyle.graphTitle}> Owner Metrics</Text>
+          </View>
+          <View style={MainStyle.botContainer}>
+            <Text style={MainStyle.botTitle}>Price:</Text>
+            <Text style={MainStyle.botTitle}># of Miners:</Text>
+            <Text style={MainStyle.botTitle}># of Commits:</Text>
+            <Text style={MainStyle.botTitle}># of Clients:</Text>
+          </View>
       </View>
+
     );
   }
-
-
 }
+
+const MainStyle = StyleSheet.create({
+  pageContainer:{
+    flex:1
+  },
+  topContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    width:375,
+    height: 50,
+    backgroundColor: 'black'
+  },
+  midContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    width:375,
+    backgroundColor: 'grey',
+    paddingBottom: 250
+  },
+  botContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    width:375,
+    height: 50,
+    backgroundColor: 'black',
+  },
+  graphTitle:{
+    color: '#D3A15D',
+    paddingLeft: 100,
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  botTitle:{
+    paddingTop:10,
+    color: '#D3A15D',
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 20,
+    paddingLeft: 90
+  }
+})
+
 class ProfileScreen extends React.Component{
   static navigationOptions = {
     title: 'Profile Page',
@@ -228,7 +281,7 @@ class ProfileScreen extends React.Component{
       <View style={Profilestyles.logoContainer}>
         <Text style={Profilestyles.title}>Hello! " insert username" </Text>
       </View>
- 
+
     );
   }
 
@@ -239,7 +292,7 @@ logoContainer:{
     alignItems: 'center',
     flexGrow: 1,
     paddingTop: 20,
-    
+
 },
 title:{
     textAlign: 'center',
@@ -247,7 +300,7 @@ title:{
     width: 300,
     fontWeight: 'bold',
     fontSize: 30,
-    
+
 
 }
 
@@ -270,6 +323,3 @@ export default class App extends React.Component {
 }
 
 AppRegistry.registerComponent('SimpleApp', () => SimpleApp);
-
-
-
