@@ -13,17 +13,23 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch"
+    "test": "node node_modules/jest/bin/jest.js --watch",
+    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001'"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
+    "apollo-client-preset": "^1.0.3",
     "expo": "^21.0.0",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
     "react": "16.0.0-alpha.12",
+    "react-apollo": "^2.0.1",
     "react-native": "^0.48.4",
     "react-native-wordpress-editor": "^2.0.1",
     "react-navigation": "^1.0.0-beta.19",
+    "react-router-dom": "^4.2.2",
     "watchman": "^0.1.8"
   }
 }
