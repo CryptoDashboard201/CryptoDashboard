@@ -1,5 +1,7 @@
 
+'use strict'
 import React, {Component, PropTypes} from 'react';
+import { VictoryBar } from "victory-native";
 import { StackNavigator } from 'react-navigation';
 import {AppRegistry,Button, StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 
@@ -47,7 +49,6 @@ class LoginScreen extends React.Component{
         </View>
         <View style={Loginstyles.formContainer}>
          <Image
-
           style={Loginstyles.image}
           source={require('./MMLogo.png')}
         />
@@ -135,7 +136,8 @@ const Loginstyles = StyleSheet.create({
     marginBottom: 15,
     height: 40,
     top: -80,
-    backgroundColor: 'rgba(255,255,255,.7)'
+    backgroundColor: 'rgba(255,255,255,.7)', 
+    paddingLeft: 10
   },
   input1:{
     borderRadius: 10,
@@ -144,7 +146,8 @@ const Loginstyles = StyleSheet.create({
     marginBottom: 15,
     height: 40,
     top: -80,
-    backgroundColor: 'rgba(255,255,255,.7)'
+    backgroundColor: 'rgba(255,255,255,.7)',
+    paddingLeft: 10
   },
   submitForm:{
     color: 'black',
@@ -201,31 +204,38 @@ const Loginstyles = StyleSheet.create({
 
 class MainScreen extends React.Component{
   static navigationOptions = {
-    title: 'Dashboard',
+    title: 'Dashboard'
   };
-  render() {
-    const { navigate } = this.props.navigation;
-    return (
-      <View style={MainStyle.pageContainer}>
-          <View style={MainStyle.topContainer}>
-            <Text style = {{color: 'white', textAlign: 'center'}}>Welcome To Your Dashboard</Text>
-              <Button
-                onPress={() => navigate('Profile')}
-                title="See Your Profile"
-                color= "#D3A15D"
-              />
-          </View>
-          <View style={MainStyle.midContainer}>
-            <Text style={MainStyle.graphTitle}> Owner Metrics</Text>
-          </View>
-          <View style={MainStyle.botContainer}>
-            <Text style={MainStyle.botTitle}>Price:</Text>
-            <Text style={MainStyle.botTitle}># of Miners:</Text>
-            <Text style={MainStyle.botTitle}># of Commits:</Text>
-            <Text style={MainStyle.botTitle}># of Clients:</Text>
-          </View>
-      </View>
+  // render() {
+  //   const { navigate } = this.props.navigation;
+  //   return (
+  //     <View style={MainStyle.pageContainer}>
+  //         <View style={MainStyle.topContainer}>
+  //           <Text style = {{color: 'white', textAlign: 'center'}}>Welcome To Your Dashboard</Text>
+  //             <Button
+  //               onPress={() => navigate('Profile')}
+  //               title="See Your Profile"
+  //               color= "#D3A15D"
+  //             />
+  //         </View>
+  //         <View style={MainStyle.midContainer}>
+  //           <Text style={MainStyle.graphTitle}> Owner Metrics</Text>
+  //         </View>
+  //         <View style={MainStyle.botContainer}>
+  //           <Text style={MainStyle.botTitle}>Price:</Text>
+  //           <Text style={MainStyle.botTitle}># of Miners:</Text>
+  //           <Text style={MainStyle.botTitle}># of Commits:</Text>
+  //           <Text style={MainStyle.botTitle}># of Clients:</Text>
+  //         </View>
+  //     </View>
 
+  //   );
+  // }
+  render() {
+    return (
+      <View style={styles.container}>
+        <VictoryBar/>
+      </View>
     );
   }
 }
@@ -286,12 +296,31 @@ class ProfileScreen extends React.Component{
       bigImages: true,
     };
   }
+
   render() {
     return (
 
-
-        <View style={Profilestyles.logoContainer}>
-          <Text style={Profilestyles.title}>Welcome To Your Profile!</Text>
+        <View style={Profilestyles.mainContainer}>
+          <View style={Profilestyles.logoContainer}>
+            <Text style={Profilestyles.title}>Welcome To Your Profile!</Text>
+          </View>
+          <View>
+            <Text style={Profilestyles.notifText}>Notification{"\n"}Preferences(%)</Text>
+          </View>
+          <View style={Profilestyles.notifContainer}>
+            <TextInput style={Profilestyles.notifInput}
+              editable = {true}
+              maxLength = {3}
+              keyboardType = 'numeric'
+            />
+            <View style={Profilestyles.buttonSubmit}>
+            <Button
+              onPress={() => navigate('Profile')}
+              title="Set"
+              color= "#D3A15D"
+            />
+            </View>
+          </View>
         </View>
        
 
@@ -302,6 +331,10 @@ class ProfileScreen extends React.Component{
 }
 
 const Profilestyles = StyleSheet.create({
+  mainContainer:{
+    alignItems: 'center',
+
+  },
   logoContainer:{
       alignItems: 'center',
       flexGrow: 1,
@@ -314,8 +347,36 @@ const Profilestyles = StyleSheet.create({
       width: 300,
       fontWeight: 'bold',
       fontSize: 30,
+      left: 20
+  },
+  notifContainer:{
+    paddingLeft: 10,
+    left: 70,
+  },
+  notifInput:{
+   borderWidth: 1,
+   paddingLeft: 20,
+   top: 55,
+   paddingRight: 50,
+   width: 10,
+   textAlign: 'center',
+   paddingTop: 10,
 
 
+
+
+  },
+  notifText:{
+    fontWeight: 'bold',
+    fontSize: 18,
+    top: 50,
+    fontFamily: 'Courier New',
+    textAlign: 'center',
+    alignItems: 'center'
+  },
+  buttonSubmit:{
+    top:60,
+    alignItems: 'center',
   }
 
 
