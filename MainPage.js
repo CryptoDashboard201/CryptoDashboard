@@ -53,11 +53,18 @@ export default class MainPage extends React.Component{
               }}
       
               data={[
-                { x: 1, y: 2 },
-                { x: 2, y: 3 },
-                { x: 3, y: 5 },
-                { x: 4, y: 4 },
-                { x: 5, y: 7 }
+                { y: 0.0, x: 0.0 },
+                { y: 0.34, x: 1.0},
+                { y: 3.48, x: 10.0},
+                { y: 7.39, x: 20.0 },
+                { y: 12.0, x: 30.0 },
+                { y: 17.5, x: 40.0},
+                { y: 24.8, x: 50.0 },
+                { y: 33.5, x: 60.0 },
+                { y: 43.3, x: 70.0 },
+                { y: 54.9, x: 80.0 },
+                { y: 70.8, x: 90.0 },
+                { y: 100.0, x: 100.0 },
               ]}
             />
           </VictoryChart>
@@ -66,9 +73,9 @@ export default class MainPage extends React.Component{
           </View>
           <View style={MainStyle.botContainer}>
             <Text style={MainStyle.botTitle}>24-Hour Pricing($)</Text>
-            <Text style={MainStyle.botTitle}>Current Price:</Text>
-            <Text style={MainStyle.botTitle}>Highest Price:</Text>
-            <Text style={MainStyle.botTitle}>Lowest Price:</Text>
+            <Text style={MainStyle.botTitle}>Current Price: 7960.65</Text>
+            <Text style={MainStyle.botTitle}>Highest Price: 8107.76</Text>
+            <Text style={MainStyle.botTitle}>Lowest Price: 7673.37</Text>
           </View>
       </View>
 
