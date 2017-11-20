@@ -22,14 +22,10 @@
   "dependencies": {
     "apollo-client-preset": "^1.0.3",
     "expo": "^21.0.0",
-<<<<<<< HEAD
-    "react": "^16.0.0",
-=======
+    "react": "16.0.0-alpha.12",
     "graphql": "^0.11.7",
     "graphql-tag": "^2.5.0",
-    "react": "16.0.0-alpha.12",
     "react-apollo": "^2.0.1",
->>>>>>> 11bf81fe8d9b82887bdd5a9ae030a6f8b0bd33d2
     "react-native": "^0.48.4",
     "react-native-cameraroll": "^1.0.0-alpha2",
     "react-native-chart": "^1.0.8-beta",
@@ -37,12 +33,7 @@
     "react-native-svg": "^6.0.0",
     "react-native-wordpress-editor": "^2.0.1",
     "react-navigation": "^1.0.0-beta.19",
-<<<<<<< HEAD
-    "react-pathjs-chart": "^0.3.5",
-    "victory-native": "^0.16.1",
-=======
     "react-router-dom": "^4.2.2",
->>>>>>> 11bf81fe8d9b82887bdd5a9ae030a6f8b0bd33d2
     "watchman": "^0.1.8"
   }
 }
