@@ -1,7 +1,10 @@
 
+'use strict'
 import React, {Component, PropTypes} from 'react';
+import { VictoryBar } from "victory-native";
 import { StackNavigator } from 'react-navigation';
 import {AppRegistry,Button, StyleSheet, View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
+
 // PUT THIS AT THE TOP NEXT TO YOUR REACT IMPORTS
 import ApolloClient, {createNetworkInterface} from 'apollo-client'
 import {ApolloProvider} from 'react-apollo'
