@@ -34,7 +34,7 @@ export default class Profile extends React.Component{
           style={styles.image}
           source={require('./ProfileImage.png')} />
           </TouchableOpacity>
-          <Text style={styles.username}>Username: </Text>
+          <Text style={styles.username}>Username: TommyTrojan</Text>
           <Text style={styles.messageTitle}>Contact Us!</Text>
           <View style={styles.buttonContainer1}>
           <TextInput style={styles.messageInput}
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     fontFamily: "Courier New",
     fontWeight: 'bold',
     fontSize: 20,
-    right: 85,
+    right: 20,
     top: -130
   },
   setButton:{
