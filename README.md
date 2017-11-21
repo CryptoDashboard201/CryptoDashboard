@@ -21,13 +21,13 @@ app runs on port 8080
 to run application : $ npm run ios
 
 Dashboard view:
-![Alt Text](https://giphy.com/gifs/l2QEcFm85vwff46D6)
+![Alt Text](https://media.giphy.com/media/l2QEcFm85vwff46D6/giphy.gif)
 
 Login View:
-![Alt Text](http://www.giphy.com/gifs/xT0xet5zC52cTxshe8)
+![Alt Text](https://media.giphy.com/media/xT0xet5zC52cTxshe8/giphy.gif)
 
 Profile View:
-![Alt Text](https://giphy.com/gifs/3o6fJaDrdx4Dq4YKuA)
+![Alt Text](https://media.giphy.com/media/3o6fJaDrdx4Dq4YKuA/giphy.gif)
 
 Server:
 ![Alt Text](https://files.slack.com/files-tmb/T7B3KEG8J-F831VJ59B-4e03a9708a/backendworking_1024.jpg)
